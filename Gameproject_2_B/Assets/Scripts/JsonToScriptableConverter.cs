@@ -18,15 +18,7 @@ public class JsonToScriptableConverter : EditorWindow
         GetWindow<JsonToScriptableConverter>("JSON to Scriptable Objects");
     }
 
-    private void OnGUI()
-    {
-        GUILayout.Label("JSON to Scriptable object Converter", EditorStyles.boldLabel);
-        EditorGUILayout.Space();
-
-        if (GUILayout.Button("Select JSON File"))
-        {
-            jsonFilePath = EditorUtility.OpenFilePanel("Select JSON File", "", "json");
-        }
+    
 
         void OnGUI()
         {
@@ -62,7 +54,7 @@ public class JsonToScriptableConverter : EditorWindow
 
 
         }
-    }
+    
 
 
 
