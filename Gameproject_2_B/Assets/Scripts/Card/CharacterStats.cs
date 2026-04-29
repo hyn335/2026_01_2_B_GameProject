@@ -11,11 +11,41 @@ public class CharacterStats : MonoBehaviour
     public Slider healthBar;
     public TextMeshProUGUI healthText;
 
+    public int maxMana = 10;                                      //최대 마나
+    public int currentMana;                                       //현재 마나
+    public Slider manaBar;                                        //마나 바 UI
+    public TextMeshProUGUI manaText;                             //마나 텍스트 UI
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         currentHealth = maxHealth;
+        currentMana = maxMana;
+        UpdateUI();
+    }
+
+    public void UseMana(int amount)
+    {
+        currentMana -= amount;
+        if (currentMana < 0)
+        {
+            currentMana = 0;
+
+        }
+        UpdateUI();
+    }
+
+    // --- 마나 회복 로직 (image_cf439c) ---
+    public void GainMana(int amount)
+    {
+        currentMana += amount;
+
+        if (currentMana > maxMana)
+        {
+            currentMana = maxMana;
+        }
+        UpdateUI();
     }
 
     public void TakeDamage(int damage)
@@ -28,9 +58,27 @@ public class CharacterStats : MonoBehaviour
         currentHealth += amount;
     }
 
-    // Update is called once per frame
-    void Update()
+  
+    private void UpdateUI()
     {
-        
+        if (healthBar != null)
+        {
+            healthBar.value = (float)currentHealth / maxHealth;
+        }
+
+        if (healthText != null)
+        {
+            healthText.text = $"{currentHealth} / {maxHealth}";
+        }
+
+        if (manaBar != null)
+        {
+            manaBar.value = (float)currentMana / maxMana;
+        }
+
+        if (manaText != null)
+        {
+            manaText.text = $"{currentMana} / {maxMana}";
+        }
     }
 }
